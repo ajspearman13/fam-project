@@ -1,0 +1,23 @@
+GET http://localhost:5000/entries
+
+#####
+POST  http://localhost:5000/entries
+Content-Type: application/json
+
+{
+    "date" : "helping hand", 
+    "description": " Neverland",
+    "type" : "Income",
+    "amount": 888 
+    
+    
+}
+
+######
+ GET  http://localhost:5000/entries/623fab9d432336912151da32
+
+
+#####
+
+DELETE  http://localhost:5000/entries/623fab9d432336912151da32
+ 

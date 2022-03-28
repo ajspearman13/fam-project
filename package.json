@@ -1,0 +1,26 @@
+{
+  "name": "family",
+  "version": "1.0.0",
+  "description": "",
+  "main": "help.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajspearman13/fam-project.git"
+  },
+  "author": "AJ",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajspearman13/fam-project/issues"
+  },
+  "homepage": "https://github.com/ajspearman13/fam-project#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "create-react-app": "^1.2.1",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.8"
+  }
+}
