@@ -1,11 +1,11 @@
 GET http://localhost:5000/entries
 
-#####
+#####ex
 POST  http://localhost:5000/entries
 Content-Type: application/json
 
 {
-    "date" : "helping hand", 
+    "date" : "Testing", 
     "description": " Neverland",
     "type" : "Income",
     "amount": 888 

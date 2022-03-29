@@ -5,6 +5,7 @@ const router = express.Router()
 //router.use(bodyParser.json)
 //router.use(bodyParser.urlencoded({extended: false}))
 
+
 import mongoose from 'mongoose'
 const schema = new mongoose.Schema({
     date: {
