@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
 
     try {
       res.json(allEntries)
-        
+           
     } catch (error) {
         res.json({message : error.message})
     }
