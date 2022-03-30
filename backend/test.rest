@@ -12,14 +12,14 @@ Content-Type: application/json
     "type" : "Income",
     "amount": 888 
     
-    
+      
 }
 
 ######
  GET  http://localhost:5000/entries/623fab9d432336912151da32
 
 
-#####
+##### 
 
-DELETE  http://localhost:5000/entries/623fab9d432336912151da32
+DELETE  http://localhost:5000/entries/6241e613836c9f182f7947f5
  

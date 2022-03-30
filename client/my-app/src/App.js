@@ -26,19 +26,32 @@ function App() {
 
   const [payrollArr, setPayrollArr] = useState([])
   const [expensesArr, setExpensesArr] = useState([])
-  const [incomeArr, setIncomeArr] = useState([])
+  const [income, setIncomeArr] = useState([])
 
 
   function createRow(){
-  
-    axios.post('http://localhost:5000/entries', {
+    try {
+       (amount <= 0)? alert(" Enter a valid amount")
+      :(date === "")? alert(" Enter a valid date")
+      :(type === '')? alert(" Enter a valid type")
+      : axios.post('http://localhost:5000/entries', {
       date: date,
       description : description,
       type: type,
       amount: amount,
-      
-      
+
     })
+
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+    
+  
+    
+
     setDependency( Math.random())
     setDate('')
     setDescription('')
@@ -68,7 +81,7 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:5000/entries')
     //.then(res=> setCommishArr(res))
-          .then(res =>  { setTableData(res.data.map(formatRow))
+          .then(res =>  { setTableData(res.data.sort((a,b) => new Date (a.date) - new Date (b.date )).map(formatRow))
                           setOrgData(res.data)   
                         })
          // .then(res=> setCommishArr(res))
@@ -78,7 +91,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setTotal(dollar.format(orgData.map(realAmount).reduce((a,b)=> a+b)))
-      setIncomeArr(orgData.filter(x => x.type === "Commissions" || "Income").map(x=> x.amount).reduce((a,b)=> a+b)  )
+      setIncomeArr(orgData.filter(x => x.type === "Commissions" || x.type === "Income" ).map(x=> x.amount).reduce((a,b)=> a+b)  )
       setPayrollArr(orgData.filter(x => x.type === "Payroll" ).map(x=> x.amount).reduce((a,b)=> a+b)  )
       setExpensesArr(orgData.filter(x => x.type === "Expenses" ).map(x=> x.amount).reduce((a,b)=> a+b)  )
     }, 100);
@@ -89,17 +102,17 @@ function App() {
     <div className="App">
 
         <input type="date" placeholder="Date" className="input-item" value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={(e) => setDate( e.target.value)}
         /> 
         <input type="text" placeholder="Description" className="input-item" value={description}
         onChange={(e) => setDescription(e.target.value)}
         />
         <select id="TypeList" className="input-item"  onChange={(e) => setType(e.target.value)} > Type
           <option value={type} >  Select Type  </option>
-          <option value="Commissions"   > Commissions </option>
-          <option value="Expenses"    > Expenses  </option>
-          <option value="Payroll"   > Payroll </option>
-          <option value="Income"   > Income  </option>
+          <option value= "Commissions"   > Commissions </option>
+          <option value= "Expenses"    > Expenses  </option>
+          <option value= "Payroll"   > Payroll </option>
+          <option value= "Income"   > Income  </option>
         </select>
         <input type="number"  placeholder="Amount" className="input-item" value={amount}
         onChange={(e) => setAmount(e.target.value)}
@@ -129,13 +142,13 @@ function App() {
   </tr>
   </thead>
   <tbody>
-    <td> {dollar.format(incomeArr)}</td>
+    <td> {dollar.format(income)}</td>
     <td> {dollar.format(payrollArr)} </td>
     <td> {dollar.format(expensesArr)} </td>
   </tbody>
 </table>
 
-<button onClick={()=> console.log(orgData)}> heyyyyyy</button>
+<button onClick={()=> console.log( orgData)}> heyyyyyy</button>
     </div>
   );
 }

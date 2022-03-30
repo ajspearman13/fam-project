@@ -10,7 +10,7 @@ import mongoose from 'mongoose'
 const schema = new mongoose.Schema({
     date: {
         type : String,
-       default: Date.now , 
+       
         required: true
     },
     description: {
@@ -54,7 +54,6 @@ router.get('/:id', getEntry,  (req, res) => {
   
         res.json(res.entry)
           
-      
   })
 router.post('/', async (req, res) => {
   
