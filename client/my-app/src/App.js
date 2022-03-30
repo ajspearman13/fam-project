@@ -34,6 +34,7 @@ function App() {
        (amount <= 0)? alert(" Enter a valid amount")
       :(date === "")? alert(" Enter a valid date")
       :(type === '')? alert(" Enter a valid type")
+
       : axios.post('http://localhost:5000/entries', {
       date: date,
       description : description,
@@ -47,11 +48,6 @@ function App() {
       console.log(error)
     }
 
-
-    
-  
-    
-
     setDependency( Math.random())
     setDate('')
     setDescription('')
@@ -60,9 +56,18 @@ function App() {
 
   }
   function formatRow(x){
+   const site = 'http://localhost:5000/entries/' + x['_id']
+    function deleteRow(){
+     axios.delete(site , x).then(() =>  setDependency( Math.random() )).catch(e=> console.log(e))
+     //console.log(site )
+     setDependency( Math.random() )
+     console.log(dependency)
+    }
+
    return <tr key={x['_id']}  >
       <td> {x.date}  </td><td> {x.description} </td><td> {x.type}  </td>
       <td> {dollar.format(x.amount)} </td>
+      <td> <button onClick={deleteRow}>X</button>  </td>
     </tr>
   }
   const realAmount = (x)=>{
@@ -72,11 +77,6 @@ function App() {
        
 
   }
-  function makePayroll(x){
-    orgData.filter(x => x.type > 0)
-  }
-
-
 
   useEffect(() => {
     axios.get('http://localhost:5000/entries')
@@ -86,6 +86,7 @@ function App() {
                         })
          // .then(res=> setCommishArr(res))
           .catch(err => console.log(err))
+          console.log(dependency)
 
   }, [dependency])
   useEffect(() => {
@@ -126,6 +127,7 @@ function App() {
       <th>Description</th>
       <th>Type</th>
       <th>Amount</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
