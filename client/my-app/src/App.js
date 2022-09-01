@@ -6,11 +6,6 @@ var dollar = new Intl.NumberFormat('en-US', {
   currency :'USD'
 })
 
-
-
-
-
-
 function App() {
   const [date, setDate] = useState('')
   const [description, setDescription] = useState('')
@@ -101,25 +96,34 @@ function App() {
 
   return (
     <div className="App">
-
-        <input type="date" placeholder="Date" className="input-item" value={date}
-        onChange={(e) => setDate( e.target.value)}
-        /> 
-        <input type="text" placeholder="Description" className="input-item" value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        />
-        <select id="TypeList" className="input-item"  onChange={(e) => setType(e.target.value)} > Type
-          <option value={type} >  Select Type  </option>
-          <option value= "Commissions"   > Commissions </option>
-          <option value= "Expenses"    > Expenses  </option>
-          <option value= "Payroll"   > Payroll </option>
-          <option value= "Income"   > Income  </option>
-        </select>
-        <input type="number"  placeholder="Amount" className="input-item" value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        /> 
-        <button onClick={createRow} > Clear </button>
+      <div className= 'header'>
+        <h1>
+          Expense Tracker
+        </h1>
+      </div>
+        <div id="input-box" >  
+          <input type="date" placeholder="Date" className="input-item" value={date}
+          onChange={(e) => setDate( e.target.value)}
+          /> 
+          <input type="text" placeholder="Description" className="input-item" value={description}
+          onChange={(e) => setDescription(e.target.value) } style={{width: "400px"}}
+          />
+          <select id="TypeList" className="input-item"  onChange={(e) => setType(e.target.value)} > Type
+            <option value={type} >  Select Type  </option>
+            <option value= "Commissions"   > Commissions </option>
+            <option value= "Expenses"    > Expenses  </option>
+            <option value= "Payroll"   > Payroll </option>
+            <option value= "Income"   > Income  </option>
+          </select>
+          <input type="number"  placeholder="Amount" className="input-item" value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          /> 
+          <button onClick={createRow} > Clear </button>
+        </div>
         <hr/>
+<div id="total-box">
+Total:<br/><span>{total}</span>
+</div>
 <table>
   <thead>
     <tr>
@@ -133,7 +137,9 @@ function App() {
   <tbody>
     {tableData}
   </tbody>
-</table> Total {total}
+</table> 
+
+
 
 <table>
 <thead>
@@ -150,7 +156,7 @@ function App() {
   </tbody>
 </table>
 
-<button onClick={()=> console.log( orgData)}> heyyyyyy</button>
+
     </div>
   );
 }
